@@ -22,9 +22,28 @@ async function openFrame(id){
 }
 function photoRect(slot,p){
  const [x,y,w,h]=slot; if(!p.img)return null;
+ // Cover-fit: fill the entire photo opening without stretching the source image.
  const fit=Math.max(w/p.img.width,h/p.img.height);const scale=fit*p.zoom;
  const dw=p.img.width*scale,dh=p.img.height*scale;
- return {x:x+w/2+ p.dx-dw/2,y:y+h/2+p.dy-dh/2,w:dw,h:dh};
+ return {x:x+w/2+p.dx-dw/2,y:y+h/2+p.dy-dh/2,w:dw,h:dh};
+}
+// Special openings in the supplied artwork. Coordinates remain in the original 1024x1536 frame space.
+// circle frames must never show square photo corners; tilted instant-photo frames use a rotated clip.
+function slotShape(frameId,index){
+ const circles={26:[0,1,2],30:[0,1,2,3],45:[0,1,2,3]};
+ if(circles[frameId]?.includes(index)) return {type:'ellipse'};
+ const tilted={6:[-7,7,-7],11:[-7,7,-7],38:[-7,7,-7],39:[-5,0,5],41:[-7,7,-7]};
+ if(tilted[frameId]?.[index]!==undefined) return {type:'rotated',angle:tilted[frameId][index]};
+ return {type:'round',radius:Math.max(5,Math.min(state.slots[index][2],state.slots[index][3])*.035)};
+}
+function clipSlot(context,slot,shape){
+ const [x,y,w,h]=slot;context.beginPath();
+ if(shape.type==='ellipse') context.ellipse(x+w/2,y+h/2,w/2,h/2,0,0,Math.PI*2);
+ else if(shape.type==='rotated'){
+  context.translate(x+w/2,y+h/2);context.rotate((shape.angle||0)*Math.PI/180);context.rect(-w/2,-h/2,w,h);
+ }
+ else {const r=Math.min(shape.radius||0,w/2,h/2);context.moveTo(x+r,y);context.arcTo(x+w,y,x+w,y+h,r);context.arcTo(x+w,y+h,x,y+h,r);context.arcTo(x,y+h,x,y,r);context.arcTo(x,y,x+w,y,r);}
+ context.clip();
 }
 function drawCanvas(){
  if(!state.frameImage)return;
@@ -33,7 +52,7 @@ function drawCanvas(){
  state.slots.forEach((slot,i)=>{
   const p=state.photos[i];const [x,y,w,h]=slot;
   if(p&&p.img){
-   ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const r=photoRect(slot,p);ctx.drawImage(p.img,r.x,r.y,r.w,r.h);ctx.restore();
+   ctx.save();clipSlot(ctx,slot,slotShape(state.frame.id,i));const r=photoRect(slot,p);ctx.drawImage(p.img,r.x,r.y,r.w,r.h);ctx.restore();
   }else if(!state.configMode){
    ctx.save();ctx.strokeStyle='rgba(236,139,173,.95)';ctx.lineWidth=Math.max(3,canvas.width/360);ctx.setLineDash([10,8]);ctx.strokeRect(x,y,w,h);ctx.setLineDash([]);ctx.fillStyle='rgba(255,242,247,.84)';ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.min(w,h)*.12,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c97d99';ctx.font=`bold ${Math.max(18,Math.min(w,h)*.14)}px sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('+',x+w/2,y+h/2);ctx.restore();
   }
@@ -100,7 +119,7 @@ $('downloadBtn').addEventListener('click',()=>{
  // Export from a full-resolution canvas. Uploaded photos are drawn at their natural decoded resolution.
  const out=document.createElement('canvas');out.width=state.frame.width;out.height=state.frame.height;const o=out.getContext('2d');
  o.drawImage(state.frameImage,0,0,out.width,out.height);
- state.slots.forEach((slot,i)=>{const p=state.photos[i];if(!p?.img)return;const [x,y,w,h]=slot;const r=photoRect(slot,p);o.save();o.beginPath();o.rect(x,y,w,h);o.clip();o.drawImage(p.img,r.x,r.y,r.w,r.h);o.restore();});
+ state.slots.forEach((slot,i)=>{const p=state.photos[i];if(!p?.img)return;const [x,y,w,h]=slot;const r=photoRect(slot,p);o.save();clipSlot(o,slot,slotShape(state.frame.id,i));o.drawImage(p.img,r.x,r.y,r.w,r.h);o.restore();});
  out.toBlob(blob=>{if(!blob){alert('Không xuất được ảnh.');return;}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`DuckFrameBooth-${state.frame.name.replace(/\s+/g,'-')}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),15000);},'image/png');
 });
 $('enterBtn').addEventListener('click',()=>showPage('catalog'));
