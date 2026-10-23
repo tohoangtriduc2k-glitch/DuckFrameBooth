@@ -34,7 +34,7 @@ function slotShape(frameId,index){
  if(circles[frameId]?.includes(index)) return {type:'ellipse'};
  if(frameId===15 && index===0) return {type:'heart'};
  if(frameId===21 && index===0) return {type:'ellipse'};
- const tilted={6:[-7,7],38:[-8,8,-6],39:[-5,0,5],41:[-8,7,-5],49:[-7,0,5],60:[-5,-4],63:[-10,16,-10]};
+ const tilted={39:[-5,0,5],49:[-7,0,5],60:[-5,-4]};
  if(tilted[frameId]?.[index]!==undefined) return {type:'rotated',angle:tilted[frameId][index]};
  return {type:'round',radius:Math.max(5,Math.min(state.slots[index][2],state.slots[index][3])*.035)};
 }
@@ -79,10 +79,10 @@ function drawCanvas(){
  $('downloadBtn').disabled=!state.photos.some(p=>p.img);
 }
 function renderSlots(){
- $('slotList').innerHTML=state.slots.map((s,i)=>{const p=state.photos[i];return `<div class="slot-item ${i===state.selectedSlot?'active':''}" data-slot="${i}"><div class="slot-thumb">${p?.img?`<img src="${p.img.src}" alt="">`:'♡'}</div><div class="slot-details"><b>Ô ảnh ${i+1}</b><small>${p?.name?esc(p.name):'Chưa chọn ảnh'}</small></div><div class="slot-actions"><button class="mini-btn choose" data-slot="${i}">＋ Ảnh</button><input class="file-input" id="file-${i}" data-slot="${i}" type="file" accept="image/*"></div></div>`}).join('');
+ $('slotList').innerHTML=state.slots.map((s,i)=>{const p=state.photos[i];return `<div class="slot-item ${i===state.selectedSlot?'active':''}" data-slot="${i}"><div class="slot-thumb">${p?.img?`<img src="${p.img.src}" alt="">`:'♡'}</div><div class="slot-details"><b>Ô ảnh ${i+1}</b><small>${p?.name?esc(p.name):'Chưa chọn ảnh'}</small></div><div class="slot-actions"><button class="mini-btn choose" data-slot="${i}" aria-label="Thêm ảnh vào ô ${i+1}">＋ Thêm ảnh</button><input class="file-input" id="file-${i}" data-slot="${i}" type="file" accept="image/*"></div></div>`}).join('');
  $('slotList').querySelectorAll('.slot-item').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button')||e.target.closest('input'))return;selectSlot(Number(el.dataset.slot));}));
  $('slotList').querySelectorAll('.choose').forEach(b=>b.addEventListener('click',()=>{$(`file-${b.dataset.slot}`).click();}));
- $('slotList').querySelectorAll('input[type=file]').forEach(input=>input.addEventListener('change',e=>loadPhoto(Number(input.dataset.slot),e.target.files[0])));
+ $('slotList').querySelectorAll('input[type=file]').forEach(input=>input.addEventListener('change',e=>{const file=e.target.files?.[0];if(file)loadPhoto(Number(input.dataset.slot),file);input.value='';}));
  selectSlot(state.selectedSlot);drawCanvas();
 }
 function selectSlot(i){
@@ -97,7 +97,7 @@ function loadPhoto(i,file){
  if(!file.type.startsWith('image/')){alert('Vui lòng chọn một file ảnh.');return;}
  const url=URL.createObjectURL(file),im=new Image();
  im.onload=()=>{const old=state.photos[i];if(old?.img&&old.img.src.startsWith('blob:'))URL.revokeObjectURL(old.img.src);state.photos[i]={img:im,name:file.name,zoom:1,dx:0,dy:0};state.selectedSlot=i;renderSlots();};
- im.onerror=()=>alert('Không đọc được ảnh này. Hãy thử ảnh JPG hoặc PNG khác.');
+ im.onerror=()=>{URL.revokeObjectURL(url);alert('Không đọc được ảnh này. Hãy thử ảnh JPG hoặc PNG khác.');};
  im.src=url;
 }
 $('zoomRange').addEventListener('input',()=>{const p=state.photos[state.selectedSlot];if(p?.img){p.zoom=Number($('zoomRange').value);drawCanvas();}});
@@ -119,7 +119,7 @@ canvas.addEventListener('pointermove',e=>{
 canvas.addEventListener('pointerup',e=>{
  if(state.configMode&&state.drawStart&&state.drawCurrent){
   const b=normalRect(state.drawStart,state.drawCurrent);state.drawStart=null;state.drawCurrent=null;
-  if(b[2]>15&&b[3]>15){state.slots.push(b.map(Math.round));state.photos.push({img:null,name:'',zoom:1,dx:0,dy:0});state.selectedSlot=state.slots.length-1;renderSlots();}
+  if(b[2]>15&&b[3]>15){const x=Math.max(0,Math.min(canvas.width-1,b[0])),y=Math.max(0,Math.min(canvas.height-1,b[1]));const right=Math.max(x+10,Math.min(canvas.width,b[0]+b[2])),bottom=Math.max(y+10,Math.min(canvas.height,b[1]+b[3]));const slot=[Math.round(x),Math.round(y),Math.round(right-x),Math.round(bottom-y)];if(slot[0]+slot[2]<=canvas.width&&slot[1]+slot[3]<=canvas.height){state.slots.push(slot);state.photos.push({img:null,name:'',zoom:1,dx:0,dy:0});state.selectedSlot=state.slots.length-1;renderSlots();}}
   else drawCanvas();
  }
  state.dragging=false;state.dragPoint=null;

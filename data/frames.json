@@ -222,30 +222,6 @@
     "needsReview": true
   },
   {
-    "id": 6,
-    "name": "Frame 06",
-    "file": "frame-06.png",
-    "originalName": "IMG_4145.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        122,
-        153,
-        778,
-        522
-      ],
-      [
-        122,
-        844,
-        778,
-        522
-      ]
-    ],
-    "slotCount": 2,
-    "needsReview": true
-  },
-  {
     "id": 7,
     "name": "Frame 07",
     "file": "frame-07.jpg",
@@ -291,7 +267,7 @@
       ]
     ],
     "slotCount": 6,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 8,
@@ -339,7 +315,7 @@
       ]
     ],
     "slotCount": 6,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 9,
@@ -500,25 +476,55 @@
     "height": 1536,
     "slots": [
       [
-        50,
-        129,
-        151,
-        292
+        45,
+        139,
+        424,
+        291
       ],
       [
-        824,
-        445,
-        153,
-        321
+        557,
+        139,
+        424,
+        291
       ],
       [
-        50,
-        470,
-        152,
-        296
+        45,
+        458,
+        424,
+        299
+      ],
+      [
+        557,
+        458,
+        424,
+        299
+      ],
+      [
+        45,
+        780,
+        424,
+        295
+      ],
+      [
+        557,
+        780,
+        424,
+        295
+      ],
+      [
+        45,
+        1100,
+        424,
+        275
+      ],
+      [
+        557,
+        1100,
+        424,
+        275
       ]
     ],
-    "slotCount": 3,
+    "slotCount": 8,
     "needsReview": true
   },
   {
@@ -890,19 +896,37 @@
     "height": 1536,
     "slots": [
       [
-        565,
-        573,
-        229,
-        227
+        100,
+        671,
+        659,
+        504
       ],
       [
-        544,
-        1145,
-        246,
-        241
+        559,
+        594,
+        178,
+        133
+      ],
+      [
+        555,
+        895,
+        178,
+        170
+      ],
+      [
+        748,
+        897,
+        240,
+        166
+      ],
+      [
+        559,
+        1167,
+        188,
+        160
       ]
     ],
-    "slotCount": 2,
+    "slotCount": 5,
     "needsReview": true
   },
   {
@@ -1730,34 +1754,16 @@
     "height": 1536,
     "slots": [
       [
-        503,
-        823,
-        455,
-        596
-      ]
-    ],
-    "slotCount": 1,
-    "needsReview": true
-  },
-  {
-    "id": 38,
-    "name": "Frame 38",
-    "file": "frame-38.png",
-    "originalName": "IMG_4148.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        122,
-        153,
-        778,
-        522
+        86,
+        164,
+        878,
+        610
       ],
       [
-        122,
-        844,
-        778,
-        522
+        496,
+        803,
+        473,
+        623
       ]
     ],
     "slotCount": 2,
@@ -1812,30 +1818,6 @@
         806,
         394,
         648
-      ]
-    ],
-    "slotCount": 2,
-    "needsReview": true
-  },
-  {
-    "id": 41,
-    "name": "Frame 41",
-    "file": "frame-41.png",
-    "originalName": "IMG_4146.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        122,
-        153,
-        778,
-        522
-      ],
-      [
-        122,
-        844,
-        778,
-        522
       ]
     ],
     "slotCount": 2,
@@ -2432,19 +2414,37 @@
     "height": 1536,
     "slots": [
       [
-        768,
-        186,
-        129,
-        157
+        27,
+        532,
+        205,
+        250
       ],
       [
-        859,
-        217,
-        138,
-        136
+        244,
+        532,
+        207,
+        250
+      ],
+      [
+        27,
+        796,
+        205,
+        246
+      ],
+      [
+        244,
+        796,
+        207,
+        246
+      ],
+      [
+        481,
+        528,
+        519,
+        520
       ]
     ],
-    "slotCount": 2,
+    "slotCount": 5,
     "needsReview": true
   },
   {
@@ -2481,7 +2481,7 @@
       ]
     ],
     "slotCount": 4,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 58,
@@ -2625,7 +2625,7 @@
       ]
     ],
     "slotCount": 2,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 61,
@@ -2661,7 +2661,7 @@
       ]
     ],
     "slotCount": 4,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 62,
@@ -2721,37 +2721,7 @@
       ]
     ],
     "slotCount": 8,
-    "needsReview": false
-  },
-  {
-    "id": 63,
-    "name": "Frame 63",
-    "file": "frame-63.png",
-    "originalName": "IMG_4147.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        125,
-        145,
-        420,
-        435
-      ],
-      [
-        386,
-        414,
-        390,
-        472
-      ],
-      [
-        122,
-        824,
-        405,
-        438
-      ]
-    ],
-    "slotCount": 3,
-    "needsReview": false
+    "needsReview": true
   },
   {
     "id": 64,
@@ -2811,6 +2781,6 @@
       ]
     ],
     "slotCount": 8,
-    "needsReview": false
+    "needsReview": true
   }
 ]
