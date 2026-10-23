@@ -32,13 +32,24 @@ function photoRect(slot,p){
 function slotShape(frameId,index){
  const circles={26:[0,1,2],30:[0,1,2,3],45:[0,1,2,3]};
  if(circles[frameId]?.includes(index)) return {type:'ellipse'};
- const tilted={6:[-7,7,-7],11:[-7,7,-7],38:[-7,7,-7],39:[-5,0,5],41:[-7,7,-7]};
+ if(frameId===15 && index===0) return {type:'heart'};
+ if(frameId===21 && index===0) return {type:'ellipse'};
+ const tilted={6:[-7,7],38:[-8,8,-6],39:[-5,0,5],41:[-8,7,-5],49:[-7,0,5]};
  if(tilted[frameId]?.[index]!==undefined) return {type:'rotated',angle:tilted[frameId][index]};
  return {type:'round',radius:Math.max(5,Math.min(state.slots[index][2],state.slots[index][3])*.035)};
 }
 function clipSlot(context,slot,shape){
  const [x,y,w,h]=slot;context.beginPath();
  if(shape.type==='ellipse') context.ellipse(x+w/2,y+h/2,w/2,h/2,0,0,Math.PI*2);
+ else if(shape.type==='heart'){
+  // Heart-shaped opening for Frame 15; clip inside the dashed heart border.
+  context.moveTo(x+w*.5,y+h*.98);
+  context.bezierCurveTo(x+w*.38,y+h*.88,x+w*.02,y+h*.58,x+w*.02,y+h*.30);
+  context.bezierCurveTo(x+w*.02,y+h*.06,x+w*.30,y-h*.02,x+w*.5,y+h*.18);
+  context.bezierCurveTo(x+w*.70,y-h*.02,x+w*.98,y+h*.06,x+w*.98,y+h*.30);
+  context.bezierCurveTo(x+w*.98,y+h*.58,x+w*.62,y+h*.88,x+w*.5,y+h*.98);
+  context.closePath();
+ }
  else if(shape.type==='rotated'){
   context.translate(x+w/2,y+h/2);context.rotate((shape.angle||0)*Math.PI/180);context.rect(-w/2,-h/2,w,h);
  }

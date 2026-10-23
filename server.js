@@ -15,7 +15,7 @@ app.put("/api/frames/:id/slots",(req,res)=>{
   const frames=readFrames(), id=Number(req.params.id), frame=frames.find(f=>f.id===id);
   if(!frame) return res.status(404).json({error:"Không tìm thấy frame."});
   const slots=req.body.slots;
-  if(!Array.isArray(slots)||slots.length<1||slots.length>20) return res.status(400).json({error:"Số ô phải từ 1 đến 20."});
+  if(!Array.isArray(slots)||slots.length<1||slots.length>40) return res.status(400).json({error:"Số ô phải từ 1 đến 40."});
   for(const s of slots){
     if(!Array.isArray(s)||s.length!==4||s.some(n=>!Number.isFinite(n))) return res.status(400).json({error:"Tọa độ ô không hợp lệ."});
     if(s[0]<0||s[1]<0||s[2]<10||s[3]<10||s[0]+s[2]>frame.width||s[1]+s[3]>frame.height) return res.status(400).json({error:"Ô ảnh nằm ngoài frame."});
