@@ -34,7 +34,7 @@ function slotShape(frameId,index){
  if(circles[frameId]?.includes(index)) return {type:'ellipse'};
  if(frameId===15 && index===0) return {type:'heart'};
  if(frameId===21 && index===0) return {type:'ellipse'};
- const tilted={6:[-7,7],38:[-8,8,-6],39:[-5,0,5],41:[-8,7,-5],49:[-7,0,5]};
+ const tilted={6:[-7,7],38:[-8,8,-6],39:[-5,0,5],41:[-8,7,-5],49:[-7,0,5],60:[-5,-4],63:[-10,16,-10]};
  if(tilted[frameId]?.[index]!==undefined) return {type:'rotated',angle:tilted[frameId][index]};
  return {type:'round',radius:Math.max(5,Math.min(state.slots[index][2],state.slots[index][3])*.035)};
 }
