@@ -845,42 +845,23 @@
     "slotCount": 7,
     "needsReview": true
   },
-  {
-    "id": 19,
-    "name": "Frame 19",
-    "file": "frame-19.png",
-    "originalName": "IMG_4161.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        123,
-        164,
-        362,
-        480
-      ],
-      [
-        544,
-        164,
-        384,
-        452
-      ],
-      [
-        123,
-        927,
-        362,
-        452
-      ],
-      [
-        544,
-        927,
-        384,
-        454
-      ]
-    ],
-    "slotCount": 4,
-    "needsReview": false
-  },
+  
+{
+  "id": 19,
+  "name": "Frame 19",
+  "file": "frame-19.png",
+  "originalName": "IMG_4161.PNG",
+  "width": 1024,
+  "height": 1536,
+  "slots": [
+    [123, 164, 362, 480],
+    [544, 164, 384, 452],
+    [123, 927, 362, 452],
+    [544, 927, 384, 454]
+  ],
+  "slotCount": 4,
+  "needsReview": false
+},
   {
     "id": 20,
     "name": "Frame 20",
@@ -941,48 +922,24 @@
     "slotCount": 8,
     "needsReview": true
   },
-  {
-    "id": 21,
-    "name": "Frame 21",
-    "file": "frame-21.png",
-    "originalName": "CB8A1FEC-106C-4E20-BC1F-74286EA55298.png",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        64,
-        420,
-        394,
-        690
-      ],
-      [
-        571,
-        558,
-        226,
-        247
-      ],
-      [
-        578,
-        874,
-        145,
-        216
-      ],
-      [
-        750,
-        875,
-        233,
-        242
-      ],
-      [
-        400,
-        1140,
-        389,
-        270
-      ]
-    ],
-    "slotCount": 5,
-    "needsReview": false
-  },
+ 
+{
+  "id": 21,
+  "name": "Frame 21",
+  "file": "frame-21.png",
+  "originalName": "CB8A1FEC-106C-4E20-BC1F-74286EA55298.png",
+  "width": 1024,
+  "height": 1536,
+  "slots": [
+    [64, 420, 394, 690],
+    [571, 558, 226, 247],
+    [578, 874, 145, 216],
+    [750, 875, 233, 242],
+    [400, 1140, 389, 270]
+  ],
+  "slotCount": 5,
+  "needsReview": false
+},
   {
     "id": 22,
     "name": "Frame 22",
@@ -1235,36 +1192,24 @@
     "slotCount": 8,
     "needsReview": true
   },
-  {
-    "id": 26,
-    "name": "Frame 26",
-    "file": "frame-26.png",
-    "originalName": "IMG_4151.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        173,
-        157,
-        246,
-        246
-      ],
-      [
-        173,
-        565,
-        246,
-        246
-      ],
-      [
-        173,
-        973,
-        246,
-        246
-      ]
-    ],
-    "slotCount": 3,
-    "needsReview": false
-  },
+ 
+{
+  "id": 26,
+  "name": "Frame 26",
+  "file": "frame-26.png",
+  "originalName": "IMG_4151.PNG",
+  "width": 1024,
+  "height": 1536,
+  "slots": [
+    [173, 157, 246, 246],
+    [173, 565, 246, 246],
+    [173, 973, 246, 246]
+  ],
+  "slotCount": 3,
+  "needsReview": false,
+  "shape": "circle"
+},
+
   {
     "id": 27,
     "name": "Frame 27",
@@ -1451,42 +1396,23 @@
     "slotCount": 8,
     "needsReview": true
   },
-  {
-    "id": 30,
-    "name": "Frame 30",
-    "file": "frame-30.png",
-    "originalName": "IMG_4167.PNG",
-    "width": 1024,
-    "height": 1536,
-    "slots": [
-      [
-        115,
-        148,
-        309,
-        310
-      ],
-      [
-        600,
-        148,
-        309,
-        310
-      ],
-      [
-        115,
-        837,
-        309,
-        310
-      ],
-      [
-        600,
-        837,
-        309,
-        310
-      ]
-    ],
-    "slotCount": 4,
-    "needsReview": false
-  },
+  
+{
+  "id": 30,
+  "name": "Frame 30",
+  "file": "frame-30.png",
+  "originalName": "IMG_4167.PNG",
+  "width": 1024,
+  "height": 1536,
+  "slots": [
+    [115, 148, 309, 310],
+    [600, 148, 309, 310],
+    [115, 837, 309, 310],
+    [600, 837, 309, 310]
+  ],
+  "slotCount": 4,
+  "needsReview": false
+},
   {
     "id": 31,
     "name": "Frame 31",
